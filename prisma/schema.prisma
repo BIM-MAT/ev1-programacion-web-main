@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./mi_base_de_datos.db"
+}
+
+model Usuario {
+  id       String       @id @default(uuid())
+  username String       @unique
+  name     String
+  password String
+  token    String? 
+  recordatorios Recordatorio[]
+}
+
+model Recordatorio {
+  id        String   @id @default(uuid())
+  content   String
+  important Boolean
+  createdAt DateTime @default(now())
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+}
