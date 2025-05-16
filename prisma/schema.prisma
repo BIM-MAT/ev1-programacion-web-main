@@ -19,7 +19,7 @@ model Usuario {
 model Recordatorio {
   id        String   @id @default(uuid())
   content   String
-  important Boolean
+  important Boolean @default(false)
   createdAt DateTime @default(now())
   usuario   Usuario  @relation(fields: [usuarioId], references: [id])
   usuarioId String
