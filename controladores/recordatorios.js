@@ -31,6 +31,7 @@ export async function obtenerRecordatorio(req, res) {
 export async function crearRecordatorio(req, res) {
   try {
     const nuevo = await crear(req.user.id, req.body);
+    nuevo.createdAt= Date.parse(nuevo.createdAt)
     res.status(201).json(nuevo);
   } catch (error) {
     res.status(500).json({ error: "Error al crear recordatorio" });
@@ -43,6 +44,7 @@ export async function actualizarRecordatorio(req, res) {
     if (!actualizado) {
       return res.status(404).json({ error: "Recordatorio no encontrado" });
     }
+    actualizado.createdAt= Date.parse(actualizado.createdAt)
     res.status(200).json(actualizado);
   } catch (error) {
     res.status(500).json({ error: "Error al actualizar recordatorio" });
